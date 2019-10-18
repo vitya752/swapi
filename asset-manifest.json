@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/swapi/static/css/main.ac448e54.chunk.css",
+    "main.js": "/swapi/static/js/main.95509cb0.chunk.js",
+    "main.js.map": "/swapi/static/js/main.95509cb0.chunk.js.map",
+    "runtime-main.js": "/swapi/static/js/runtime-main.0ceb0c54.js",
+    "runtime-main.js.map": "/swapi/static/js/runtime-main.0ceb0c54.js.map",
+    "static/js/2.d4d3e8da.chunk.js": "/swapi/static/js/2.d4d3e8da.chunk.js",
+    "static/js/2.d4d3e8da.chunk.js.map": "/swapi/static/js/2.d4d3e8da.chunk.js.map",
+    "index.html": "/swapi/index.html",
+    "precache-manifest.17af80e2fc5c18bcc63f2d1f44824b80.js": "/swapi/precache-manifest.17af80e2fc5c18bcc63f2d1f44824b80.js",
+    "service-worker.js": "/swapi/service-worker.js",
+    "static/css/main.ac448e54.chunk.css.map": "/swapi/static/css/main.ac448e54.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0ceb0c54.js",
+    "static/js/2.d4d3e8da.chunk.js",
+    "static/css/main.ac448e54.chunk.css",
+    "static/js/main.95509cb0.chunk.js"
+  ]
+}
