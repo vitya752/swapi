@@ -1,0 +1,12 @@
+.item-details {
+    align-items: start;
+    flex-direction: row;
+}
+.item-details img {
+    max-width: 150px;
+}
+@media screen and (max-device-width: 575.98px) {
+    .item-details {
+        flex-direction: column;
+    }
+}

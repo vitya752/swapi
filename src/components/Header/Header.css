@@ -1,0 +1,27 @@
+header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+}
+header a:hover {
+    text-decoration: none;
+}
+header .logo {
+    margin-right: 30px;
+}
+header .logo a {
+    font-size: 30px;
+    color: rgb(0, 204, 255);
+}
+header .links a {
+    color: #fff;
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: rgb(0, 204, 255);
+}
+@media screen and (max-device-width: 575.98px) {
+    header {
+        flex-direction: column;
+    }
+}
