@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Loader from '../Loader/Loader';
 import './ItemDetails.css';
 
@@ -10,11 +10,22 @@ export {
     Round
 }
 
-class ItemDetails extends Component {
+class ItemDetailsContainer extends Component {
 
     state = {
         item: {},
         loading: false
+    }
+
+    componentDidMount = () => {
+        if( window.innerWidth > 767 ) {
+            window.addEventListener('scroll', function() {
+                const itemDetails = document.getElementById('item-details');
+                if( itemDetails ) {
+                    itemDetails.style.top = `${window.pageYOffset}px`;
+                }
+            });
+        }
     }
 
     componentDidUpdate(prevProps) {
@@ -37,21 +48,18 @@ class ItemDetails extends Component {
         const { item } = this.state;
         const { id, name } = item;
         const { form } = this.props;
-        if( this.state.loading  ) return <Loader />;
-        if( id === undefined ) return <span>Select the item</span>;
+        const renderDetails = this.state.loading ? 
+            <Loader /> : id === undefined ? 
+            <span>Select the item</span> : 
+            <ItemDetails 
+                id={id} 
+                name={name} 
+                form={form} 
+                item={item}
+                children={this.props.children} />
         return (
-            <div className="card item-details">
-                <img className="card-img-top" src={`https://starwars-visualguide.com/assets/img/${form}/${id}.jpg`} alt={name} />
-                <div className="card-body">
-                    <h5 className="card-title">{name}</h5>
-                    <ul className="list-group list-group-flush">
-                        {
-                            React.Children.map(this.props.children, (child) => {
-                                return React.cloneElement(child, { item })
-                            })
-                        }
-                    </ul>
-                </div>
+            <div id="item-details" className="card item-details">
+                { renderDetails }
             </div>
         );
     }
@@ -64,4 +72,22 @@ class ItemDetails extends Component {
 
 }
 
-export default ItemDetails;
+const ItemDetails = ({ id, name, form, item, children }) => {
+    return (
+        <Fragment>
+            <img className="card-img-top" src={`https://starwars-visualguide.com/assets/img/${form}/${id}.jpg`} alt={name} />
+            <div className="card-body">
+                <h5 className="card-title">{name}</h5>
+                <ul className="list-group list-group-flush">
+                    {
+                        React.Children.map(children, (child) => {
+                            return React.cloneElement(child, { item })
+                        })
+                    }
+                </ul>
+            </div>
+        </Fragment>
+    )
+}
+
+export default ItemDetailsContainer;

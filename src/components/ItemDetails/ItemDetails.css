@@ -1,4 +1,6 @@
 .item-details {
+    top: 0;
+    position: relative;
     align-items: start;
     flex-direction: row;
 }

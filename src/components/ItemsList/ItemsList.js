@@ -3,12 +3,13 @@ import Loader from './../Loader/Loader';
 import withSwapiService from './../hoc/withSwapiService';
 import './ItemsList.css';
 
-class ItemsList extends Component {
+class ItemsListContainer extends Component {
 
     state = {
         itemsList: [],
         loading: true,
-        next: null
+        next: null,
+        loadingMore: true
     };
 
     componentDidMount() {
@@ -17,48 +18,69 @@ class ItemsList extends Component {
     }
 
     render() {
-        const { itemsList, loading, next } = this.state;
+        const { itemsList, loading, next, loadingMore } = this.state;
         const { onItemSelect, getMore } = this.props;
-        const renderItems = itemsList.map(({ id, name }, idx) => {
-            return (
-                <li 
-                    key={idx} 
-                    className="list-group-item"
-                    onClick={() => onItemSelect(id)}>
-                    {name} ({id})
-                </li>
-            )
+        const items = itemsList.map(({ id, name }) => {
+            return <CreateItem key={id} id={id} name={name} onItemSelect={onItemSelect} />;
         });
-        const renderContent = loading ? <Loader /> : renderItems;
-        const loadMore = (
-            <button 
-                type="button" 
-                className="btn btn-primary"
-                onClick={() => this.updateItems(getMore)}>Load more</button>
-        );
+        const renderContent = loading ? <Loader /> : items;
+        const loadMore = <LoadMore updateItems={this.updateItems} getMore={getMore} loadingMore={loadingMore} />;
         const viewLoadMore = next === null ? null : loadMore;
         return (
-            <div className="card items-list">
-                <ul className="list-group list-group-flush">
-                    { renderContent }
-                </ul>
-                { viewLoadMore }
-            </div>
+            <ItemsList renderContent={renderContent} viewLoadMore={viewLoadMore} />
         );
     }
 
     updateItems = (getData) => {
         const { itemsList, next } = this.state;
         getData(next)
+            .then(this.setState({
+                loadingMore: true
+            }))
             .then(({result, next}) => {
                 this.setState({
                     itemsList: [...itemsList, ...result],
                     loading: false,
-                    next: next
+                    next: next,
+                    loadingMore: false
                 })
             });
     }
 
 }
 
-export default withSwapiService()(ItemsList);
+const CreateItem = ({ id, name, onItemSelect }) => {
+    return (
+        <li
+            className="list-group-item"
+            onClick={() => onItemSelect(id)}>
+            {name} ({id})
+        </li>
+    )
+}
+
+const LoadMore = ({ updateItems, getMore, loadingMore }) => {
+    return(
+        <button 
+            type="button" 
+            className="btn btn-primary btn_loadmore"
+            onClick={() => updateItems(getMore)}>
+            {
+                loadingMore ? <Loader /> : "Load More" 
+            }
+        </button>
+    )
+}
+
+const ItemsList = ({ renderContent, viewLoadMore }) => {
+    return(
+        <div className="card items-list">
+            <ul className="list-group list-group-flush">
+                { renderContent }
+            </ul>
+            { viewLoadMore }
+        </div>
+    )
+}
+
+export default withSwapiService()(ItemsListContainer);
