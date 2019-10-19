@@ -5,7 +5,8 @@ import withSwapiService from './../hoc/withSwapiService';
 const StarshipsPage = ({ swapiService }) => {
     const {
         getStarship,
-        getAllStarships
+        getAllStarships,
+        getMore
     } = swapiService;
 
     const rounds = [
@@ -14,7 +15,7 @@ const StarshipsPage = ({ swapiService }) => {
         { label: "Length", value: "length" }
     ];
 
-    return <Page getData={getStarship} getAllData={getAllStarships} rounds={rounds} form={"starships"}  />
+    return <Page getData={getStarship} getAllData={getAllStarships} getMore={getMore} rounds={rounds} form={"starships"}  />
 }
 
 export default withSwapiService()(StarshipsPage);

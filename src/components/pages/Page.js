@@ -3,9 +3,9 @@ import ItemsList from './../ItemsList/ItemsList';
 import ItemDetails, { Round } from './../ItemDetails/ItemDetails';
 import Row from './../Row/Row';
 
-const Page = ({ getData, getAllData, rounds, form }) => {
+const Page = ({ getData, getAllData, getMore, rounds, form }) => {
 
-    const Items = <ItemsList getData={getAllData} />;
+    const Items = <ItemsList getData={getAllData} getMore={getMore} />;
     const Details = 
         <ItemDetails getData={getData} form={form} >
             {

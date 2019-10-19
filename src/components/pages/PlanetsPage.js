@@ -5,7 +5,8 @@ import withSwapiService from './../hoc/withSwapiService';
 const PlanetsPage = ({ swapiService }) => {
     const {
         getPlanet,
-        getAllPlanets
+        getAllPlanets,
+        getMore
     } = swapiService;
 
     const rounds = [
@@ -14,7 +15,7 @@ const PlanetsPage = ({ swapiService }) => {
         { label: "Rotation period", value: "rotation" }
     ];
 
-    return <Page getData={getPlanet} getAllData={getAllPlanets} rounds={rounds} form={"planets"}  />
+    return <Page getData={getPlanet} getAllData={getAllPlanets} getMore={getMore} rounds={rounds} form={"planets"}  />
 }
 
 export default withSwapiService()(PlanetsPage);

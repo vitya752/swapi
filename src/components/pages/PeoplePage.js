@@ -5,7 +5,8 @@ import withSwapiService from './../hoc/withSwapiService';
 const PeoplePage = ({ swapiService }) => {
     const {
         getPerson,
-        getAllPeople
+        getAllPeople,
+        getMore
     } = swapiService;
 
     const rounds = [
@@ -15,7 +16,7 @@ const PeoplePage = ({ swapiService }) => {
         { label: "Height", value: "height" }
     ];
 
-    return <Page getData={getPerson} getAllData={getAllPeople} rounds={rounds} form={"characters"}  />
+    return <Page getData={getPerson} getAllData={getAllPeople} getMore={getMore} rounds={rounds} form={"characters"}  />
 }
 
 export default withSwapiService()(PeoplePage);
