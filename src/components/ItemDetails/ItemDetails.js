@@ -28,7 +28,7 @@ class ItemDetailsContainer extends Component {
         }
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps) { //shallComponentUpdate на деле использовать надо было
         const { id ,getData } = this.props;
         if( prevProps.id === id ) {
             return false;
